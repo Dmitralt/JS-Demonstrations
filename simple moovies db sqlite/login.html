@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+<body>
+
+<h2>HTML Forms</h2>
+
+<form method="POST" action="/login" enctype="multipart/form-data">
+  <label for="username">First name:</label><br>
+  <input type="text" id="fname" name="username" value="superuser"><br>
+  <label for="password">Last name:</label><br>
+  <input type="text" id="password" name="password" value="password"><br><br>
+  <input type="submit" value="Submit">
+</form>
+<!--<button type="button" onclick="LOG_ON()">Logon</button>
+<button type="button" onclick="LOG_INFO()">LogINFO</button>-->
+<p></p>
+
+</body>
+</html>
+<!--<script>
+  
+  function LOG_ON(){
+      let url = 'http://localhost:3000/login'
+  fetch(url,{
+      method:'POST',
+      headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+      body: '{"username":"superuser","password":"password"}'
+  })
+      .then(response => response.text()).then(data => console.log(data))
+    
+  }
+  function LOG_INFO(){
+      let url = 'http://localhost:3000/login'
+  fetch(url,{
+      method:'GET',
+      headers: {}
+  })
+      .then(response => response.text()).then(data => console.log(data))
+    
+  }
+
+
+  </script>-->
+<p></p>

@@ -1,0 +1,495 @@
+<style>
+  #maintextarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+  }
+
+  #JSON_body {
+    width: 50%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+  }
+
+  #query_params {
+    width: 250px;
+    height: 30px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+  }
+
+  #options {
+    width: 48%;
+    height: auto;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    float: left;
+    resize: none;
+  }
+  #result {
+    width: 48%;
+    float: right;
+    display: inline;
+    height: auto;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+  }
+
+  #input {
+    width: 48%;
+    float: right;
+    display: inline;
+    height: auto;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+  }
+  #information {
+    width: 100%;
+    float: right;
+    display: block;
+    height: auto;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+  }
+</style>
+
+<div id="options">
+  <form action="logoff" method="POST">
+    <button name="logoff" value="logoff">LOG OUT</button>
+    <label>Выйти из акаунта текущего пользователя</label>
+  </form>
+
+  <!--
+<form action="login" method="GET">
+    <button name="logoff" value="logoff">LOG OUT</button>
+</form>-->
+
+  <button type="button" onclick="Get_login_info()">Show LOGIN INFO</button
+  ><label>Показать данные про текущего пользователя</label><br />
+  <hr>
+  <br />
+
+  <button type="button" onclick="Get_users()">Get_users</button
+  ><label>Вывести список всех юзеров</label><br />
+  <br /><button type="button" onclick="SHOW_user()">SHOW_user</button
+  ><label>Показать пользователя с ID заданым в окне "Параметры"</label><br />
+  <br /><button type="button" onclick="Create_User()">Create_User</button
+  ><label>создать пользователя. Требуеться тело в поле "JSON". Пример тела в "Справке" </label><br />
+  <br /><button type="button" onclick="Delate_user()">Delate_user</button
+  ><label>Удалить пользователя с ID заданым в окне "Параметры"</label><br />
+  <br /><button type="button" onclick="Update_user()">Update_user</button
+  ><label>Изменить поля пользователя с ID заданым в окне "Параметры" на параметры заданные в поле "JSON". Детали в "Справке"</label><br />
+
+  <br /><br /><br /> <hr><br /><br />
+
+  <button type="button" onclick="Get_moovie_info()">Show All moovies</button
+  ><label>Показать все фильмы по возрастанию ID</label><br />
+  <br /><button type="button" onclick="Get_moovie_by_name()">
+    Show All moovies by Name</button
+  ><label>Показать все Фильмы по Алфавиту</label><br />
+  <br /><button type="button" onclick="SHOW_moovie_by_id()">
+    SHOW_moovie_by_id</button
+  ><label>показать фильм с ID заданым в окне "Параметры"</label><br />
+  <br /><button type="button" onclick="SHOW_moovie_by_actor()">
+    SHOW_moovie_by_actor</button
+  ><label>показать фильм с Актером  заданым в окне "Параметры"(подробности в "справка")</label><br />
+  <br /><button type="button" onclick="SHOW_moovie_by_title()">SHOW_moovie_by_title</button
+  ><label>
+    показать фильмы с названием  заданым в окне "Параметры"(подробности в "справка")</label><br />
+  <br /><button type="button" onclick="Create_moovie()">Create_moovie</button
+  ><label>создать запись о фильме. Требуеться тело в поле "JSON". Пример тела в "Справке" </label><br />
+  <br /><button type="button" onclick="Delate_moovie()">Delate_moovie</button
+  ><label>Удалить фильм с ID заданым в окне "Параметры"</label><br />
+  <br /><button type="button" onclick="Update_moovie()">Update_moovie</button
+  ><label>Изменить запись про фильм с ID заданым в окне "Параметры" на параметры заданные в поле "JSON". Детали в "Справке"</label><br />
+
+  <hr>
+  <h1>Загрузка Фильмов из файла</h1>
+  <form method="POST" action="/downloadlist" enctype="multipart/form-data">
+    <input type="file" name="file" required/>
+    <input type="submit" value="Upload" />
+  </form>
+
+
+
+</div>
+
+
+
+<div id="input">
+    <br /><br />
+    <input type="text" id="query_params" /><label>Параметры задаваемые</label
+    ><br /><br /><br />
+    <textarea id="JSON_body">
+    </textarea
+    ><label>JSON</label><br />
+    <br /><br />
+  </div>
+<div id="result">
+  <h1>Тут будет Результат</h1>
+
+  <form>
+    <textarea id="maintextarea"></textarea>
+  </form>
+</div>
+
+
+<div id="information">
+    <h1>СПРАВКА</h1>
+    <p><br />Для взаимодействия с Таблицами некоторым запросам необходимы дополнительные данные.
+        <br />
+        <br /> "Параметры задаваемые"- принимает строку(имя, ID, название)
+        <br />  "JSON" в некоторых запросах должен содержать json объект.
+        <br />
+        <br />
+        <br />######################################################################
+        <br />ПОЛЬЗОВАТЕЛИ
+        <br />
+        <br />
+        <br />Если БД была удалена, то при первом запуске появиться запись о суперюзере
+        <br />{
+            <br />       "id": 777,
+            <br />   "username": "superuser",
+            <br />   "password": "password"
+            <br />}
+            <br />(В самой БД пароли храняться в закодированом виде)
+            <br />
+            <br />
+            <br />
+            <br />-Для создания нового юзера следует в Поле json задать структуру по образцу ниже
+            <br /> {"username":"superuser","password":"password"}
+            <br />и нажать
+            <br />Create_User
+            <br />-Для вывода списка ВСЕХ пользователей необходимо нажать кнопку
+            <br />Get_users
+            <br />-Для отображения конкретного пользователя, необходимо в поле "Параметры задаваемые" указать его ID без лишних символов и нажать кнопку
+            <br />SHOW_user
+            <br />-Для отображения Юзера под которым мы залогинены необходимо нажать 
+            <br />Show LOGIN INFO
+            <br />-Для выхода из-под текущего пользователя необходимо нажать
+            <br />LOG OUT
+            <br />-Для удаления пользователя необходимо задать его id в поле "Параметры задаваемые"без лишних символов и нажать 
+            <br />Delate_user
+            <br />-Для редактирования имени и\или пароля необходимо задать его id в поле "Параметры задаваемые" а в Поле json задать структуру по образцу ниже
+            <br />{"username":"superuser","password":"password"}
+            <br />указав одно или оба поля и нажать кнопку
+            <br /> Update_user
+            <br />
+            <br />######################################################################
+            <br />ЗАПИСИ О ФИЛЬМАХ
+            <br />
+            <br />Записи о фильмах состоят из полей 
+            <br />id- задаеться самой БД
+            <br /> Title -Имя картины
+            <br /> Release_Year - год создания
+            <br />Format- формат картины принимающий 1 из 3-х значений -'VHS', 'DVD','Blu-Ray'
+            <br />Stars - перечень актёров в формате массива строк
+            <br />
+            <br />
+            <br />
+        <br />-Для создания новой записи о фильме следует в Поле json задать структуру по образцу ниже
+        <br />
+        <br />{
+        <br />"Title": "Titlename",
+        <br />"Release_Year": 2000,
+        <br />"Format": "DVD",
+        <br />"Stars": ["Actor Actor","Actor Actor"]}
+       <br /> 
+       <br /> и нажать
+       <br /> Create_moovie
+       <br /> -Для получения перечня всех фильмов в порядке ID, следует нажать
+       <br /> Show All moovies
+       <br /> -Для получения перечня всех фильмов в порядке алфавита, следует нажать
+       <br /> Show All moovies by Name
+       <br /> -Для получения фильма по ID необходимо в поле "Параметры задаваемые" указать его ID без лишних символов и нажать кнопку
+       <br /> SHOW_moovie_by_id
+       <br /> -Для получения всех картин с определенным актёром следует указать его имя в поле "Параметры задаваемые" и нажать кнопку
+       <br /> SHOW_moovie_by_actor
+       <br /> -Для получения картин с конкретным названием следует задать название в поле "Параметры задаваемые" и нажать кнопку
+       <br /> SHOW_moovie_by_title
+       <br /> -Для удаления записи необходимо задать её id в поле "Параметры задаваемые"без лишних символов и нажать 
+       <br /> Delate_moovie
+        <br />-Для редактирования полей записи  задать её id в поле "Параметры задаваемые" а в Поле json задать структуру по образцу ниже
+        <br />{
+        <br />"Title": "Titlename",
+        <br />"Release_Year": 2000,
+        <br />"Format": "DVD",
+        <br />"Stars": ["test2","test1"]}
+        <br />указав одно или несколько полей и нажать кнопку
+        <br />Update_moovie
+        <br />
+        <br />
+        <br />-Для загрузки фильмов из текстового файла необходимо создать текстовый файл образца 
+       <br /> 
+       <br /> Title: Blazing Saddles
+        <br />Release Year: 1974
+        <br />Format: VHS
+        <br />Stars: Mel Brooks, Clevon Little, Harvey Korman, Gene Wilder, Slim Pickens, Madeline Kahn
+        <br />
+        <br /> Title: Casablanca
+        <br />Release Year: 1942
+        <br />Format: DVD
+        <br />Stars: Humphrey Bogart, Ingrid Bergman, Claude Rains, Peter Lorre
+        <br />
+        <br />
+        <br />Далее в поле "Загрузка Фильмов из файла"
+        <br />необходимо нафжать "выберите файл", указать нужный файл и после нажать Upload
+        </p>
+    
+      </div>
+
+<!--<script src="./index.js"></script>-->
+<script>
+  function Get_moovie_info() {
+    let url = "http://localhost:3000/moovies";
+    fetch(url, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data.replaceAll("},{","},\n\n{"))
+      );
+  }
+
+  function Get_moovie_by_name() {
+    let url = "http://localhost:3000/moovies?sortby=Title";
+    fetch(url, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data.replaceAll("},{","},\n\n{"))
+      );
+  }
+
+  function Get_login_info() {
+    let url = "http://localhost:3000/login";
+    fetch(url, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data)
+      );
+  }
+
+  function Get_users() {
+    let url = "http://localhost:3000/users";
+    fetch(url, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (
+            
+            document.getElementById("maintextarea").innerHTML = data.replaceAll("},{","},\n\n{") )
+      );
+  }
+
+  function Create_User() {
+    let jsonbody = document.getElementById("JSON_body").value;
+
+    let query_params = document.getElementById("query_params").value;
+
+    let url = "http://localhost:3000/users";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonbody,
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data)
+      );
+  }
+
+  function Delate_user() {
+    let jsonbody = document.getElementById("JSON_body").value;
+
+    let query_params = document.getElementById("query_params").value;
+
+    let url = "http://localhost:3000/users" + "/" + query_params;
+    fetch(url, {
+      method: "DELETE",
+      headers: {},
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data)
+      );
+  }
+
+  function Update_user() {
+    
+    let jsonbody = document.getElementById("JSON_body").value;
+
+    let query_params = document.getElementById("query_params").value;
+
+
+
+
+
+    let url = "http://localhost:3000/users" + "/" + query_params;
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonbody,
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data)
+      );
+  }
+
+  function SHOW_user() {
+    let query_params = document.getElementById("query_params").value;
+    let url = "http://localhost:3000/users" + "/" + query_params;
+    fetch(url, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data)
+      );
+  }
+
+  /************************************************************/ console;
+
+  function Create_moovie() {
+    let jsonbody = document.getElementById("JSON_body").value;
+
+    let query_params = document.getElementById("query_params").value;
+
+    let url = "http://localhost:3000/moovies";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonbody,
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data)
+      );
+  }
+
+  function Delate_moovie() {
+    let jsonbody = document.getElementById("JSON_body").value;
+
+    let query_params = document.getElementById("query_params").value;
+
+    let url = "http://localhost:3000/moovies" + "/" + query_params;
+    fetch(url, {
+      method: "DELETE",
+      headers: {},
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data)
+      );
+  }
+
+  function Update_moovie() {
+    let jsonbody = document.getElementById("JSON_body").value;
+
+    let query_params = document.getElementById("query_params").value;
+
+    let url = "http://localhost:3000/moovies" + "/" + query_params;
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: jsonbody,
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data)
+      );
+  }
+
+  function SHOW_moovie_by_id() {
+    let query_params = document.getElementById("query_params").value;
+    let url = "http://localhost:3000/moovies" + "/" + query_params;
+    fetch(url, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data)
+      );
+  }
+
+  function SHOW_moovie_by_actor() {
+    let query_params = document.getElementById("query_params").value;
+    let url = "http://localhost:3000/moovies" + "?Actor=" + query_params;
+    fetch(url, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data.replaceAll("},{","},\n\n{"))
+      );
+  }
+
+  function SHOW_moovie_by_title() {
+    let query_params = document.getElementById("query_params").value;
+    let url = "http://localhost:3000/moovies" + "?Title=" + query_params;
+    fetch(url, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => response.text())
+      .then(
+        (data) => (document.getElementById("maintextarea").innerHTML = data.replaceAll("},{","},\n\n{"))
+      );
+  }
+</script>
